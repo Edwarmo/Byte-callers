@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import './App.css';
 import { StatusBar } from 'expo-status-bar';
-import { LandingPage } from './src/pages/LandingPage';
-import { LoginPage } from './src/pages/LoginPage';
-import { CallCenterPage } from './src/pages/CallCenterPage';
-import { User } from './src/types/Auth';
+import { LandingPage } from '../pages/LandingPage';
+import { LoginPage } from '../pages/LoginPage';
+import { CallCenterPage } from '../pages/CallCenterPage';
+import { User } from '../types/Auth';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'public' | 'login' | 'app'>('public');

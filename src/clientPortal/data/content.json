@@ -1,0 +1,32 @@
+{
+  "features": [
+    {
+      "id": "productivity",
+      "title": "Mejore la productividad",
+      "description": "Satisfaga las necesidades de Centro de Contacto de todos los tamaños, hoy y en el futuro.",
+      "icon": "📈",
+      "imageUrl": "https://via.placeholder.com/300x200/3498db/ffffff?text=Productivity"
+    },
+    {
+      "id": "cloud-solution",
+      "title": "Solución en la nube",
+      "description": "Reemplace sistemas locales tradicionales con una solución moderna en la nube.",
+      "icon": "☁️",
+      "imageUrl": "https://via.placeholder.com/300x200/2ecc71/ffffff?text=Cloud"
+    },
+    {
+      "id": "ai-automation",
+      "title": "IA y Automatización",
+      "description": "Potencie a su equipo con inteligencia artificial práctica y automatización en la nube.",
+      "icon": "🤖",
+      "imageUrl": "https://via.placeholder.com/300x200/9b59b6/ffffff?text=AI"
+    },
+    {
+      "id": "customer-experience",
+      "title": "Experiencias sin esfuerzo",
+      "description": "Ofrezca experiencias que fortalezcan a sus agentes y deleiten a sus clientes.",
+      "icon": "✨",
+      "imageUrl": "https://via.placeholder.com/300x200/e67e22/ffffff?text=Experience"
+    }
+  ]
+}
