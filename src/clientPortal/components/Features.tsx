@@ -5,7 +5,8 @@ import contentData from '../data/content.json';
 
 const Features: React.FC = () => (
   <View style={styles.container}>
-    <Text style={styles.sectionTitle}>Características Principales</Text>
+    <Text style={styles.sectionTitle}>Nuestros Servicios</Text>
+    <Text style={styles.sectionSubtitle}>Incrementa las ventas y la fidelización de tus clientes a través de una experiencia única, impulsada por tecnología y estrategia.</Text>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View style={styles.featuresGrid}>
         {contentData.features.map((feature) => (
@@ -32,7 +33,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2c3e50',
     textAlign: 'center',
+    marginBottom: 12,
+  },
+  sectionSubtitle: {
+    fontSize: 16,
+    color: '#64748b',
+    textAlign: 'center',
     marginBottom: 24,
+    lineHeight: 24,
+    paddingHorizontal: 20,
   },
   featuresGrid: {
     flexDirection: 'row',

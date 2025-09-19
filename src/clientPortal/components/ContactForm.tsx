@@ -20,7 +20,8 @@ const ContactForm: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Obtenga un presupuesto rápido</Text>
+      <Text style={styles.title}>Consúltanos y adelántate a tus competidores</Text>
+      <Text style={styles.subtitle}>Rellena este formulario para hablar con uno de nuestros estrategas sobre cómo la IA puede transformar tus resultados de negocio.</Text>
       
       <Input
         label="Email"
@@ -79,8 +80,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#2c3e50',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#64748b',
     marginBottom: 20,
     textAlign: 'center',
+    lineHeight: 22,
   },
   disclaimer: {
     fontSize: 12,

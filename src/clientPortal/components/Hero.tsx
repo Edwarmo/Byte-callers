@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Hero: React.FC = () => (
   <View style={styles.hero}>
-    <Text style={styles.title}>Ponte en contacto con nosotros</Text>
+    <Text style={styles.title}>Gestionamos el ciclo de vida de tus clientes con Inteligencia Artificial</Text>
     <Text style={styles.subtitle}>
-      Descubre los canales que ByteCallers Call Center tiene para ti
+      Integramos IA conversacional en cada interacción para potenciar tus ventas, optimizar tus operaciones y fidelizar a tus clientes. Nos convertimos en tu socio para la transformación digital de la voz.
     </Text>
     <TouchableOpacity style={styles.ctaButton}>
-      <Text style={styles.ctaText}>Obtener ayuda dando clic aquí</Text>
+      <Text style={styles.ctaText}>Descubre Nuestras Soluciones</Text>
     </TouchableOpacity>
   </View>
 );

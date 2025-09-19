@@ -5,49 +5,60 @@ const Footer: React.FC = () => (
   <View style={styles.footer}>
     <View style={styles.content}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>ByteCallers</Text>
-        <Text style={styles.description}>
-          Conectamos personas, potenciamos soluciones
-        </Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Enlaces rápidos</Text>
+        <Text style={styles.sectionTitle}>Soluciones Integrales</Text>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Política de privacidad</Text>
+          <Text style={styles.linkText}>Customer Experience IA</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Términos y condiciones</Text>
+          <Text style={styles.linkText}>Ventas E2E con IA</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Contacto</Text>
+          <Text style={styles.linkText}>Recobro & Recuperación IA</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Soporte</Text>
+        <Text style={styles.sectionTitle}>Nuestros Servicios</Text>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Centro de ayuda</Text>
+          <Text style={styles.linkText}>Automatización del Customer Journey</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Documentación</Text>
+          <Text style={styles.linkText}>Business Intelligence Conversacional</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>Estado del servicio</Text>
+          <Text style={styles.linkText}>Back Office Inteligente</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Empresa</Text>
+        <TouchableOpacity style={styles.link}>
+          <Text style={styles.linkText}>¿Por qué nosotros?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.link}>
+          <Text style={styles.linkText}>Insights & Blog</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.link}>
+          <Text style={styles.linkText}>Únete a nuestro equipo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.link}>
+          <Text style={styles.linkText}>Canal ético</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Contacto</Text>
-        <Text style={styles.contactInfo}>📞 +1 (555) 123-4567</Text>
-        <Text style={styles.contactInfo}>✉️ info@bytecallers.com</Text>
-        <Text style={styles.contactInfo}>📍 Ciudad, País</Text>
+        <Text style={styles.contactInfo}>info@bytecallers.com</Text>
+        <Text style={styles.contactInfo}>LinkedIn | Twitter/X</Text>
+        <Text style={styles.description}>
+          Suscríbete a nuestra Newsletter para insights sobre IA conversacional
+        </Text>
       </View>
     </View>
 
     <View style={styles.bottom}>
       <Text style={styles.copyright}>
-        © 2024 ByteCallers. Todos los derechos reservados.
+        © 2025 ByteCallers, S.L. | Aviso legal | Política de privacidad | Política de cookies | Quejas y reclamaciones
       </Text>
     </View>
   </View>

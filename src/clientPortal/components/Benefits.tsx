@@ -3,31 +3,33 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Benefits: React.FC = () => (
   <View style={styles.container}>
-    <Text style={styles.title}>Transforme su centro de llamadas</Text>
-    <Text style={styles.subtitle}>y su visión de CX</Text>
+    <Text style={styles.title}>¿Por qué un socio experto en IA?</Text>
+    <Text style={styles.subtitle}>
+      En el mercado actual, la velocidad y la calidad de cada interacción definen a los líderes. Te ayudamos a diseñar y ejecutar una estrategia de comunicación inteligente, utilizando IA para crear experiencias únicas que generan lealtad y resultados medibles.
+    </Text>
     
     <View style={styles.benefitsList}>
       <View style={styles.benefit}>
-        <Text style={styles.benefitIcon}>🤝</Text>
-        <Text style={styles.benefitTitle}>Inteligencia colaborativa</Text>
+        <Text style={styles.benefitIcon}>🎯</Text>
+        <Text style={styles.benefitTitle}>Customer Experience IA</Text>
         <Text style={styles.benefitText}>
-          Combine el elemento humano del servicio con IA y automatización
+          Automatizamos la atención y el soporte, resolviendo el 90% de las consultas de forma instantánea y 24/7
         </Text>
       </View>
       
       <View style={styles.benefit}>
-        <Text style={styles.benefitIcon}>🤖</Text>
-        <Text style={styles.benefitTitle}>IA práctica</Text>
+        <Text style={styles.benefitIcon}>📈</Text>
+        <Text style={styles.benefitTitle}>Ventas & Captación E2E</Text>
         <Text style={styles.benefitText}>
-          Reduzca costos y aumente productividad con aplicaciones prácticas de IA
+          Potenciamos tus procesos comerciales con agentes IA que califican leads y acortan el ciclo de venta
         </Text>
       </View>
       
       <View style={styles.benefit}>
-        <Text style={styles.benefitIcon}>⚡</Text>
-        <Text style={styles.benefitTitle}>Optimización de fuerza de trabajo</Text>
+        <Text style={styles.benefitIcon}>📊</Text>
+        <Text style={styles.benefitTitle}>Business Intelligence Conversacional</Text>
         <Text style={styles.benefitText}>
-          Aumente el ROI, impulse productividad y mejore la resolución
+          Transformamos millones de minutos de llamadas en datos estructurados e insights accionables
         </Text>
       </View>
     </View>
