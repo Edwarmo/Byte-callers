@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ByteCallers - Call Center App
 
 Aplicación de call center desarrollada en React Native con Expo CLI y TypeScript, implementando arquitectura modular.
@@ -77,3 +78,6 @@ npm run ios        # iOS
 ## 📄 Licencia
 
 MIT License - ByteCallers 2024
+=======
+# Byte-callers
+>>>>>>> 85909e049fa09387b5d53453668e83e493ea770c
