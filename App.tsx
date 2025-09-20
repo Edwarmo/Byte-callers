@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LandingPage } from './src/pages/LandingPage';
 import { LoginPage } from './src/pages/LoginPage';
 import { CallCenterPage } from './src/pages/CallCenterPage';
-import { User } from './src/types/Auth';
+import { User } from './src/entities/user/model';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'public' | 'login' | 'app'>('public');

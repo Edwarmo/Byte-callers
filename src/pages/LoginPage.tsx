@@ -1,6 +1,6 @@
 import React from 'react';
-import { AuthContainer } from '../components/auth/AuthContainer';
-import { User } from '../types/Auth';
+import { AuthContainer } from '../features/auth-login/AuthContainer';
+import { User } from '../entities/user/model';
 
 interface LoginPageProps {
   onLoginSuccess: (user: User, token: string) => void;

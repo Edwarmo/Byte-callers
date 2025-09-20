@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Layout } from '../components/ui';
+import { Layout } from '../shared/ui';
 import { TicketDashboard } from '../views/TicketDashboard';
-import { User } from '../types/Auth';
+import { User } from '../entities/user/model';
 
 interface CallCenterPageProps {
   user: User | null;
