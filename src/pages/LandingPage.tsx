@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import Header from '../clientPortal/components/Header';
+import ResponsiveNavigation from '../clientPortal/components/ResponsiveNavigation';
 import Hero from '../clientPortal/components/Hero';
 import ServiceTabs from '../clientPortal/components/ServiceTabs';
 import Benefits from '../clientPortal/components/Benefits';
@@ -16,7 +16,7 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => (
   <View style={styles.container}>
-    <Header onNavigate={onNavigate} />
+    <ResponsiveNavigation onNavigate={onNavigate} />
     <ScrollView showsVerticalScrollIndicator={false}>
       <Hero />
       <ServiceTabs />
