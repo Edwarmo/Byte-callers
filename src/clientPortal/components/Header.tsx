@@ -24,20 +24,20 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
   const NavItems = () => (
     <>
-      <TouchableOpacity style={styles.navItem}>
-        <Text style={styles.navText}>Hogares</Text>
+      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
+        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Hogares</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Text style={styles.navText}>Empresas</Text>
+      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
+        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Empresas</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Text style={styles.navText}>Conócenos</Text>
+      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
+        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Conócenos</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Text style={styles.navText}>Servicios</Text>
+      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
+        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Servicios</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Text style={styles.navText}>Ayuda</Text>
+      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
+        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Ayuda</Text>
       </TouchableOpacity>
     </>
   );
@@ -74,11 +74,35 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         </View>
       </View>
 
-      {/* Mobile Menu */}
-      {!isTablet && isMenuOpen && (
-        <View style={styles.mobileMenu}>
-          <NavItems />
-        </View>
+      {/* Mobile Sidebar Menu */}
+      {!isTablet && (
+        <>
+          {/* Overlay */}
+          {isMenuOpen && (
+            <TouchableOpacity 
+              style={styles.overlay} 
+              activeOpacity={1}
+              onPress={toggleMenu}
+            />
+          )}
+          
+          {/* Sidebar */}
+          <View style={[
+            styles.sidebar,
+            { transform: [{ translateX: isMenuOpen ? 0 : -screenData.width * 0.45 }] }
+          ]}>
+            <View style={styles.sidebarHeader}>
+              <Text style={styles.sidebarTitle}>ByteCallers</Text>
+              <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
+                <Text style={styles.closeButtonText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.sidebarContent}>
+              <NavItems />
+            </View>
+          </View>
+        </>
       )}
     </View>
   );
@@ -143,13 +167,71 @@ const styles = StyleSheet.create({
   iconText: {
     fontSize: 18,
   },
-  mobileMenu: {
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 999,
+  },
+  sidebar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '45%',
+    height: '100vh',
     backgroundColor: '#ffffff',
+    zIndex: 1000,
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    ...(Platform.OS === 'web' && {
+      transition: 'transform 0.3s ease-in-out',
+    }),
+  },
+  sidebarHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e8f0',
+    backgroundColor: '#0f172a',
+  },
+  sidebarTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  closeButton: {
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  closeButtonText: {
+    fontSize: 16,
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  sidebarContent: {
+    flex: 1,
+    paddingTop: 20,
+  },
+  sidebarNavItem: {
     paddingVertical: 16,
     paddingHorizontal: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#e2e8f0',
-    gap: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f5f9',
+  },
+  sidebarNavText: {
+    fontSize: 18,
+    color: '#1e293b',
+    fontWeight: '500',
   },
 });
 

@@ -82,11 +82,38 @@ export const ResponsiveHeader: React.FC<ResponsiveHeaderProps> = ({
         </View>
       </View>
 
-      {/* Mobile Menu */}
-      {!isTablet && isMenuOpen && (
-        <View style={styles.mobileMenu}>
-          <MenuItems />
-        </View>
+      {/* Mobile Sidebar Menu */}
+      {!isTablet && (
+        <>
+          {/* Overlay */}
+          {isMenuOpen && (
+            <TouchableOpacity 
+              style={styles.overlay} 
+              activeOpacity={1}
+              onPress={toggleMenu}
+            />
+          )}
+          
+          {/* Sidebar */}
+          <View style={[
+            styles.sidebar,
+            { 
+              transform: [{ translateX: isMenuOpen ? 0 : -screenData.width * 0.45 }],
+              width: screenData.width * 0.45
+            }
+          ]}>
+            <View style={styles.sidebarHeader}>
+              <Text style={styles.sidebarTitle}>{title}</Text>
+              <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
+                <Text style={styles.closeButtonText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.sidebarContent}>
+              <MenuItems />
+            </View>
+          </View>
+        </>
       )}
     </View>
   );
@@ -173,11 +200,58 @@ const styles = StyleSheet.create({
     color: '#1e293b',
     fontWeight: 'bold',
   },
-  mobileMenu: {
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 999,
+  },
+  sidebar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100vh',
     backgroundColor: '#ffffff',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#e2e8f0',
+    zIndex: 1000,
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    ...(Platform.OS === 'web' && {
+      transition: 'transform 0.3s ease-in-out',
+    }),
+  },
+  sidebarHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e2e8f0',
+    backgroundColor: '#0f172a',
+  },
+  sidebarTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#ffffff',
+  },
+  closeButton: {
+    padding: 6,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  closeButtonText: {
+    fontSize: 14,
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  sidebarContent: {
+    flex: 1,
+    paddingTop: 20,
   },
 });
