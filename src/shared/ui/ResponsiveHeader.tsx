@@ -38,7 +38,7 @@ export const ResponsiveHeader: React.FC<ResponsiveHeaderProps> = ({
   };
 
   const MenuItems = () => (
-    <>
+    <View style={!isTablet ? styles.navItemsContainer : undefined}>
       {menuItems.map((item, index) => (
         <TouchableOpacity
           key={index}
@@ -53,7 +53,7 @@ export const ResponsiveHeader: React.FC<ResponsiveHeaderProps> = ({
           </Text>
         </TouchableOpacity>
       ))}
-    </>
+    </View>
   );
 
   return (
@@ -253,5 +253,12 @@ const styles = StyleSheet.create({
   sidebarContent: {
     flex: 1,
     paddingTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navItemsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Platform } from 'react-native';
+import { navigationRoutes } from './routes';
 
 interface HeaderProps {
   onNavigate?: (view: 'public' | 'login') => void;
@@ -20,27 +21,12 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const isTablet = screenData.width >= 768;
   const isDesktop = screenData.width >= 1024;
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => {
+    console.log('Toggle menu:', !isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-  const NavItems = () => (
-    <>
-      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
-        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Hogares</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
-        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Empresas</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
-        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Conócenos</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
-        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Servicios</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.navItem, !isTablet && styles.sidebarNavItem]}>
-        <Text style={[styles.navText, !isTablet && styles.sidebarNavText]}>Ayuda</Text>
-      </TouchableOpacity>
-    </>
-  );
+
 
   return (
     <View style={styles.container}>
@@ -50,7 +36,11 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         {/* Desktop/Tablet Navigation */}
         {isTablet && (
           <View style={styles.nav}>
-            <NavItems />
+            {navigationRoutes.map((route) => (
+              <TouchableOpacity key={route.id} style={styles.desktopNavItem} onPress={route.onPress}>
+                <Text style={styles.desktopNavText}>{route.label}</Text>
+              </TouchableOpacity>
+            ))}
           </View>
         )}
 
@@ -74,32 +64,44 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
         </View>
       </View>
 
-      {/* Mobile Sidebar Menu */}
-      {!isTablet && (
+      {/* Modern Sidebar */}
+      {!isTablet && isMenuOpen && (
         <>
-          {/* Overlay */}
-          {isMenuOpen && (
-            <TouchableOpacity 
-              style={styles.overlay} 
-              activeOpacity={1}
-              onPress={toggleMenu}
-            />
-          )}
-          
-          {/* Sidebar */}
-          <View style={[
-            styles.sidebar,
-            { transform: [{ translateX: isMenuOpen ? 0 : -screenData.width * 0.45 }] }
-          ]}>
+          <TouchableOpacity 
+            style={styles.overlay} 
+            activeOpacity={1}
+            onPress={toggleMenu}
+          />
+          <View style={styles.modernSidebar}>
             <View style={styles.sidebarHeader}>
-              <Text style={styles.sidebarTitle}>ByteCallers</Text>
+              <View style={styles.logoContainer}>
+                <View style={styles.logoIcon}>
+                  <Text style={styles.logoEmoji}>🚀</Text>
+                </View>
+                <Text style={styles.logoText}>ByteCallers</Text>
+              </View>
               <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
-                <Text style={styles.closeButtonText}>✕</Text>
+                <Text style={styles.closeIcon}>✕</Text>
               </TouchableOpacity>
             </View>
             
-            <View style={styles.sidebarContent}>
-              <NavItems />
+            <View style={styles.navigation}>
+              {navigationRoutes.map((route, index) => {
+                const isActive = index === 0; // Primer elemento activo por defecto
+                return (
+                  <TouchableOpacity
+                    key={route.id}
+                    style={[styles.navItem, isActive && styles.activeNavItem]}
+                    onPress={route.onPress}
+                  >
+                    <View style={[styles.iconContainer, { backgroundColor: route.color + '20' }]}>
+                      <Text style={[styles.icon, { color: route.color }]}>{route.icon}</Text>
+                    </View>
+                    <Text style={[styles.navText, isActive && styles.activeNavText]}>{route.label}</Text>
+                    {isActive && <View style={[styles.activeBorder, { backgroundColor: route.color }]} />}
+                  </TouchableOpacity>
+                );
+              })}
             </View>
           </View>
         </>
@@ -133,25 +135,20 @@ const styles = StyleSheet.create({
     flex: Platform.OS === 'web' ? 0 : 1,
   },
   nav: {
-    flexDirection: 'row',
-    gap: 24,
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
+    gap: 24,
   },
-  navItem: {
-    marginLeft: 16,
-    textAlign: 'center',
+  desktopNavItem: {
     paddingVertical: 8,
-    paddingHorizontal: 4,
+    paddingHorizontal: 12,
+    borderRadius: 8,
   },
-  navText: {
+  desktopNavText: {
     fontSize: 16,
     color: '#1e293b',
     fontWeight: '500',
-    ...(Platform.OS === 'web' && {
-      cursor: 'pointer',
-      transition: 'color 0.2s ease',
-    }),
   },
   rightIcons: {
     flexDirection: 'row',
@@ -175,66 +172,119 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: 999,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    zIndex: 998,
   },
-  sidebar: {
+  modernSidebar: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '45%',
+    top: 16,
+    left: 16,
+    width: 280,
     height: '100vh',
-    backgroundColor: '#ffffff',
-    zIndex: 1000,
-    elevation: 10,
+    borderRadius: 24,
+    backgroundColor: '#0f172a',
+    zIndex: 999,
+    elevation: 25,
     shadowColor: '#000',
-    shadowOffset: { width: 2, height: 0 },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    ...(Platform.OS === 'web' && {
-      transition: 'transform 0.3s ease-in-out',
-    }),
+    shadowOffset: { width: 0, height: 20 },
+    shadowOpacity: 0.4,
+    shadowRadius: 25,
   },
   sidebarHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingVertical: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '#e2e8f0',
-    backgroundColor: '#0f172a',
+    borderBottomColor: 'rgba(255, 255, 255, 0.08)',
   },
-  sidebarTitle: {
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  logoIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: 'rgba(99, 102, 241, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoEmoji: {
     fontSize: 20,
-    fontWeight: 'bold',
+  },
+  logoText: {
+    fontSize: 20,
+    fontWeight: '700',
     color: '#ffffff',
   },
   closeButton: {
-    padding: 8,
-    borderRadius: 6,
+    width: 32,
+    height: 32,
+    borderRadius: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  closeButtonText: {
-    fontSize: 16,
-    color: '#ffffff',
-    fontWeight: 'bold',
+  closeIcon: {
+    fontSize: 12,
+    color: '#f1f5f9',
+    fontWeight: '600',
   },
-  sidebarContent: {
+  navigation: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 32,
+    paddingHorizontal: 16,
+    gap: 8,
   },
-  sidebarNavItem: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+  navItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderWidth: 1,
+    borderColor: 'transparent',
+    position: 'relative',
+    marginBottom: 4,
   },
-  sidebarNavText: {
-    fontSize: 18,
-    color: '#1e293b',
-    fontWeight: '500',
+  activeNavItem: {
+    backgroundColor: 'rgba(99, 102, 241, 0.15)',
+    borderColor: 'rgba(99, 102, 241, 0.3)',
   },
+  iconContainer: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  icon: {
+    fontSize: 22,
+  },
+  navText: {
+    fontSize: 16,
+    color: '#f1f5f9',
+    fontWeight: '600',
+    flex: 1,
+  },
+  activeNavText: {
+    color: '#ffffff',
+  },
+  activeBorder: {
+    position: 'absolute',
+    right: 0,
+    top: '50%',
+    width: 3,
+    height: '60%',
+    borderRadius: 2,
+    transform: [{ translateY: -12 }],
+  },
+
 });
 
 export default React.memo(Header);
