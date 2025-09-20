@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   navItem: {
+    marginLeft: 16,
     textAlign: 'center',
     paddingVertical: 8,
     paddingHorizontal: 4,
