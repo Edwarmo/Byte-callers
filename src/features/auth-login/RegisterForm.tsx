@@ -60,7 +60,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
             <Text style={styles.subtitle}>Crear cuenta nueva</Text>
           </View>
 
-          <ScrollView style={styles.card} showsVerticalScrollIndicator={false}>
+          <View style={styles.card}>
             <View style={styles.row}>
               <View style={[styles.inputContainer, styles.halfWidth]}>
                 <TextInput
@@ -149,7 +149,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitchToLogin }) =
             <TouchableOpacity style={styles.loginLink} onPress={onSwitchToLogin}>
               <Text style={styles.loginLinkText}>¿Ya tienes cuenta? Inicia sesión</Text>
             </TouchableOpacity>
-          </ScrollView>
+          </View>
         </View>
       </View>
     </View>

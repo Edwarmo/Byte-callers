@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { AuthController } from '../controllers/AuthController';
 import { TicketDashboard } from './TicketDashboard';
+import { ClientsLanding } from './ClientsLanding';
 import { User } from '../types/Auth';
 import { Layout } from '../components/ui';
 
@@ -11,7 +12,7 @@ interface CallCenterViewProps {
 }
 
 export const CallCenterView: React.FC<CallCenterViewProps> = ({ user, onLogout }) => {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'calls'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'clients' | 'calls'>('dashboard');
 
   const handleLogout = useCallback(async () => {
     await AuthController.handleLogout();
@@ -32,6 +33,14 @@ export const CallCenterView: React.FC<CallCenterViewProps> = ({ user, onLogout }
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={[styles.tab, activeTab === 'clients' && styles.activeTab]}
+          onPress={() => setActiveTab('clients')}
+        >
+          <Text style={[styles.tabText, activeTab === 'clients' && styles.activeTabText]}>
+            👥 Clientes
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           style={[styles.tab, activeTab === 'calls' && styles.activeTab]}
           onPress={() => setActiveTab('calls')}
         >
@@ -41,14 +50,18 @@ export const CallCenterView: React.FC<CallCenterViewProps> = ({ user, onLogout }
         </TouchableOpacity>
       </View>
 
-      {activeTab === 'dashboard' ? (
-        <TicketDashboard user={user!} />
-      ) : (
-        <View style={styles.comingSoon}>
-          <Text style={styles.comingSoonText}>📞 Módulo de Llamadas</Text>
-          <Text style={styles.comingSoonDesc}>Próximamente disponible</Text>
-        </View>
-      )}
+      <View style={styles.content}>
+        {activeTab === 'dashboard' ? (
+          <TicketDashboard user={user!} />
+        ) : activeTab === 'clients' ? (
+          <ClientsLanding user={user!} />
+        ) : (
+          <View style={styles.comingSoon}>
+            <Text style={styles.comingSoonText}>📞 Módulo de Llamadas</Text>
+            <Text style={styles.comingSoonDesc}>Próximamente disponible</Text>
+          </View>
+        )}
+      </View>
       </View>
     </Layout>
   );
@@ -58,6 +71,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  content: {
+    flex: 1,
   },
   tabContainer: {
     flexDirection: 'row',

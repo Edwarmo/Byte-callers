@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Navigation from '../components/Navigation';
 import Benefits from '../components/Benefits';
 import Features from '../components/Features';
@@ -13,14 +13,14 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => (
   <View style={styles.container}>
-    {onNavigate && <Navigation onNavigate={onNavigate} />}
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <Benefits />
-      <Features />
-      <Videos />
-      <Testimonials />
-      <ContactForm />
-    </ScrollView>
+    <Navigation onNavigate={onNavigate || (() => {})} />
+    <View style={styles.content}>
+      <View nativeID="benefits"><Benefits /></View>
+      <View nativeID="features"><Features /></View>
+      <View nativeID="videos"><Videos /></View>
+      <View nativeID="testimonials"><Testimonials /></View>
+      <View nativeID="contact"><ContactForm /></View>
+    </View>
   </View>
 );
 
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+  },
+  content: {
+    flex: 1,
   },
 });
 

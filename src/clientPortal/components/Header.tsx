@@ -26,8 +26,6 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>

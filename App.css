@@ -1,8 +1,73 @@
-body, html, #root {
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+#root {
+  height: 100%;
+  overflow: visible;
+}
+
+/* Ocultar scrollbar nativa en móvil */
+@media (max-width: 768px) {
+  html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Scrollbar personalizada para PC */
+@media (min-width: 769px) {
+  /* Barra de scroll inteligente */
+  .smart-scrollbar {
+    position: fixed;
+    right: -12px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background: #007bff;
+    border-radius: 6px;
+    transition: right 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  
+  .smart-scrollbar.active {
+    right: 0;
+  }
+}
+
+/* Evitar scroll en contenedores internos */
+* {
+  overflow: visible;
+}
+
+/* Solo permitir scroll en elementos específicos */
+.scrollable {
   overflow: auto;
-   scrollbar-width: auto;
-   scrollbar-color: #3498db #e9ecef;
+}
+
+/* Webkit scrollbar para Chrome/Safari */
+::-webkit-scrollbar {
+  width: 12px !important;
+  display: block !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3498db !important;
+  border-radius: 6px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2980b9 !important;
 }

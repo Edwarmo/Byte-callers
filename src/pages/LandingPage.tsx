@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Platform } from 'react-native';
 import Header from '../clientPortal/components/Header';
 import Hero from '../clientPortal/components/Hero';
 import ServiceTabs from '../clientPortal/components/ServiceTabs';
@@ -16,8 +16,8 @@ interface LandingPageProps {
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => (
   <View style={styles.container}>
-    <Header onNavigate={onNavigate} />
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <Header onNavigate={onNavigate || (() => {})} />
+    <View style={styles.content}>
       <Hero />
       <ServiceTabs />
       <Benefits />
@@ -26,7 +26,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => (
       <Testimonials />
       <ContactForm />
       <Footer />
-    </ScrollView>
+    </View>
   </View>
 );
 
@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
+  },
+  content: {
+    flex: 1,
   },
 });

@@ -92,7 +92,7 @@ export const TicketDashboard: React.FC<TicketDashboardProps> = ({ user }) => {
   };
 
   const CategoryFilter = () => (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterScroll}>
+    <View style={styles.filterContainer}>
       <TouchableOpacity
         style={[styles.filterBtn, selectedCategory === 'all' && styles.activeFilter]}
         onPress={() => setSelectedCategory('all')}
@@ -108,11 +108,11 @@ export const TicketDashboard: React.FC<TicketDashboardProps> = ({ user }) => {
           <Text style={styles.filterText}>{label}</Text>
         </TouchableOpacity>
       ))}
-    </ScrollView>
+    </View>
   );
 
   const StatusFilter = () => (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterScroll}>
+    <View style={styles.filterContainer}>
       <TouchableOpacity
         style={[styles.statusBtn, selectedStatus === 'all' && styles.activeStatus]}
         onPress={() => setSelectedStatus('all')}
@@ -131,15 +131,11 @@ export const TicketDashboard: React.FC<TicketDashboardProps> = ({ user }) => {
       >
         <Text style={styles.statusText}>⏳ En Progreso</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 
   return (
-    <ScrollView 
-      style={[styles.container, Platform.OS === 'web' && styles.webContainer]} 
-      showsVerticalScrollIndicator={true}
-      contentContainerStyle={Platform.OS === 'web' ? styles.webContent : undefined}
-    >
+    <View style={styles.container}>
       <StatsPanel stats={stats} agentName={user.phoneNumber} />
 
       <TextInput
@@ -185,7 +181,7 @@ export const TicketDashboard: React.FC<TicketDashboardProps> = ({ user }) => {
           ))}
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
@@ -208,8 +204,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
-  filterScroll: {
+  filterContainer: {
+    flexDirection: 'row',
     marginBottom: 12,
+    paddingHorizontal: 16,
   },
   filterBtn: {
     backgroundColor: '#e9ecef',
@@ -264,13 +262,5 @@ const styles = StyleSheet.create({
   toggleText: {
     fontSize: 16,
   },
-  webContainer: {
-    maxHeight: '100%',
-    overflow: 'scroll',
-   
-  },
-  webContent: {
-    minHeight: '100%',
-    paddingBottom: 50,
-  },
+
 });
