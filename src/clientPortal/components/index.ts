@@ -1,6 +1,7 @@
-export { default as Benefits } from './Benefits';
 export { default as ContactForm } from './ContactForm';
 export { default as Testimonials } from './Testimonials';
-export { default as Features } from './Features';
-export { default as Videos } from './Videos';
-export { default as Card } from './Card';
+export { default as Navigation } from './Navigation';
+export { default as Footer } from './Footer';
+export { default as Solutions } from './Solutions';
+export { default as Enterprise } from './Enterprise';
+export { default as AIShowcase } from './AIShowcase';

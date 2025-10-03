@@ -1,4 +1,4 @@
-import { TicketCategory, TicketStatus, TicketPriority } from '../types/Ticket';
+import { TicketCategory, TicketStatus, TicketPriority } from '../../types/Ticket';
 
 export const TICKET_COLORS = {
   new: '#4FC3F7',

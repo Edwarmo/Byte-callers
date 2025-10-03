@@ -1,4 +1,4 @@
-import { ValidationResult } from '../types/Auth';
+import { ValidationResult } from '../../types/Auth';
 
 export const validatePhoneNumber = (phone: string): ValidationResult => {
   const phoneRegex = /^\+?[1-9]\d{1,14}$/;

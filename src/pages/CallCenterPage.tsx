@@ -1,8 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Layout } from '../shared/ui';
-import { TicketDashboard } from '../views/TicketDashboard';
-import { User } from '../entities/user/model';
+import { User } from '../business/entities/user/model';
 
 interface CallCenterPageProps {
   user: User | null;
@@ -10,87 +8,102 @@ interface CallCenterPageProps {
 }
 
 export const CallCenterPage: React.FC<CallCenterPageProps> = ({ user, onLogout }) => {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'calls'>('dashboard');
-
   return (
-    <Layout user={user} onLogout={onLogout}>
-      <View style={styles.container}>
-        <View style={styles.tabContainer}>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'dashboard' && styles.activeTab]}
-            onPress={() => setActiveTab('dashboard')}
-          >
-            <Text style={[styles.tabText, activeTab === 'dashboard' && styles.activeTabText]}>
-              📊 Dashboard
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.tab, activeTab === 'calls' && styles.activeTab]}
-            onPress={() => setActiveTab('calls')}
-          >
-            <Text style={[styles.tabText, activeTab === 'calls' && styles.activeTabText]}>
-              📞 Llamadas
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {activeTab === 'dashboard' ? (
-          <TicketDashboard user={user!} />
-        ) : (
-          <View style={styles.comingSoon}>
-            <Text style={styles.comingSoonText}>📞 Módulo de Llamadas</Text>
-            <Text style={styles.comingSoonDesc}>Próximamente disponible</Text>
-          </View>
-        )}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Panel de Agente</Text>
+        <TouchableOpacity style={styles.logoutBtn} onPress={onLogout}>
+          <Text style={styles.logoutText}>Cerrar Sesión</Text>
+        </TouchableOpacity>
       </View>
-    </Layout>
+      
+      <View style={styles.content}>
+        <Text style={styles.welcome}>Bienvenido, {user?.phoneNumber}</Text>
+        <Text style={styles.role}>Rol: {user?.role}</Text>
+        
+        <View style={styles.dashboard}>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Llamadas Hoy</Text>
+            <Text style={styles.cardValue}>24</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Tiempo Promedio</Text>
+            <Text style={styles.cardValue}>3:45</Text>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Satisfacción</Text>
+            <Text style={styles.cardValue}>4.8/5</Text>
+          </View>
+        </View>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#f8f9fa',
   },
-  tabContainer: {
+  header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
     backgroundColor: '#fff',
-    marginBottom: 16,
-    borderRadius: 12,
     elevation: 2,
   },
-  tab: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: 'center',
-    borderRadius: 12,
-  },
-  activeTab: {
-    backgroundColor: '#3498db',
-  },
-  tabText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#7f8c8d',
-  },
-  activeTabText: {
-    color: '#fff',
-  },
-  comingSoon: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 32,
-  },
-  comingSoonText: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#2c3e50',
+    color: '#0f172a',
+  },
+  logoutBtn: {
+    backgroundColor: '#e74c3c',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
+  logoutText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+  },
+  welcome: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#0f172a',
     marginBottom: 8,
   },
-  comingSoonDesc: {
+  role: {
     fontSize: 16,
-    color: '#7f8c8d',
-    textAlign: 'center',
+    color: '#64748b',
+    marginBottom: 32,
+  },
+  dashboard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 16,
+  },
+  card: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+    elevation: 2,
+  },
+  cardTitle: {
+    fontSize: 14,
+    color: '#64748b',
+    marginBottom: 8,
+  },
+  cardValue: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#3498db',
   },
 });

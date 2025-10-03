@@ -17,8 +17,3 @@ export interface AuthState {
   user: User | null;
   token: string | null;
 }
-
-export interface ValidationResult {
-  isValid: boolean;
-  message: string;
-}

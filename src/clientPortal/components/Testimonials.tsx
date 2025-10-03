@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import Card from './Card';
+import { Card } from '../../shared/ui';
 
 const testimonialsData = [
   {
@@ -35,11 +35,10 @@ const Testimonials: React.FC = () => (
       <View style={styles.testimonialsGrid}>
         {testimonialsData.map((testimonial, index) => (
           <View key={index} style={styles.testimonialItem}>
-            <Card
-              title={testimonial.title}
-              description={testimonial.description}
-              imageUrl={testimonial.imageUrl}
-            />
+            <Card>
+              <Text style={styles.testimonialTitle}>{testimonial.title}</Text>
+              <Text style={styles.testimonialDescription}>{testimonial.description}</Text>
+            </Card>
           </View>
         ))}
       </View>
@@ -65,6 +64,17 @@ const styles = StyleSheet.create({
   },
   testimonialItem: {
     width: 300,
+  },
+  testimonialTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2c3e50',
+    marginBottom: 8,
+  },
+  testimonialDescription: {
+    fontSize: 14,
+    color: '#64748b',
+    lineHeight: 20,
   },
 });
 

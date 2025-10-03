@@ -1,36 +1,62 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView, useColorScheme } from 'react-native';
 import Navigation from '../components/Navigation';
-import Benefits from '../components/Benefits';
-import Features from '../components/Features';
-import ContactForm from '../components/ContactForm';
+import Solutions from '../components/Solutions';
+import Enterprise from '../components/Enterprise';
+import AIShowcase from '../components/AIShowcase';
 import Testimonials from '../components/Testimonials';
-import Videos from '../components/Videos';
+import ContactForm from '../components/ContactForm';
+import Footer from '../components/Footer';
 
 interface LandingPageProps {
   onNavigate?: (view: 'public' | 'login') => void;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => (
-  <View style={styles.container}>
-    <Navigation onNavigate={onNavigate || (() => {})} />
-    <View style={styles.content}>
-      <View nativeID="benefits"><Benefits /></View>
-      <View nativeID="features"><Features /></View>
-      <View nativeID="videos"><Videos /></View>
-      <View nativeID="testimonials"><Testimonials /></View>
-      <View nativeID="contact"><ContactForm /></View>
+type Section = 'solutions' | 'enterprise' | 'ai-tech' | 'testimonials' | 'contact';
+
+const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
+  const [currentSection, setCurrentSection] = useState<Section>('solutions');
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
+  const renderSection = () => {
+    switch (currentSection) {
+      case 'solutions': return <Solutions />;
+      case 'enterprise': return <Enterprise />;
+      case 'ai-tech': return <AIShowcase />;
+      case 'testimonials': return <Testimonials />;
+      case 'contact': return <ContactForm />;
+    }
+  };
+
+  return (
+    <View style={[styles.container, isDark && styles.containerDark]}>
+      <Navigation 
+        onNavigate={onNavigate || (() => {})} 
+        onSectionChange={setCurrentSection}
+        currentSection={currentSection}
+      />
+      <ScrollView style={[styles.content, isDark && styles.contentDark]}>
+        {renderSection()}
+        <Footer />
+      </ScrollView>
     </View>
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f8f9fa',
   },
+  containerDark: {
+    backgroundColor: '#0f172a',
+  },
   content: {
     flex: 1,
+  },
+  contentDark: {
+    backgroundColor: '#0f172a',
   },
 });
 

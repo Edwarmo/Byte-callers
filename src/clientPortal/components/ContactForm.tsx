@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
-import { Input, Button } from '../../components/ui';
+import { Input, Button } from '../../shared/ui';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import Header from './Header';
+// import Header from '../../ui/components/Header'; // Comentado temporalmente
 import { User } from '../../types/Auth';
 
 interface LayoutProps {
@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({
   showHeader = true,
 }) => (
   <View style={styles.container}>
-    {showHeader && <Header user={user} onLogout={onLogout} />}
+    {/* {showHeader && <Header user={user} onLogout={onLogout} />} */}
     <View style={styles.content}>{children}</View>
   </View>
 );
