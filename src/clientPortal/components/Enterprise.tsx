@@ -1,70 +1,53 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, useColorScheme } from 'react-native';
+import { Card } from '../../shared/ui';
+import enterpriseData from '../../infoPageJson/enterprise.json';
 
 const Enterprise: React.FC = () => {
   const [activeCase, setActiveCase] = useState(0);
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
 
-  const cases = [
-    {
-      company: 'BancoDigital',
-      industry: 'Banca',
-      challenge: 'Consultas de saldo saturaban líneas',
-      result: '85% consultas automatizadas',
-      description: 'Voicebots atienden consultas de saldo, movimientos y horarios. Agentes humanos se enfocan en créditos y productos complejos.'
-    },
-    {
-      company: 'TelecomPlus',
-      industry: 'Telecomunicaciones',
-      challenge: 'Frustración de clientes no detectada',
-      result: '40% mejora en satisfacción',
-      description: 'Análisis de sentimiento en tiempo real alerta supervisores cuando detecta frustración, permitiendo intervención inmediata.'
-    },
-    {
-      company: 'EcommerceMax',
-      industry: 'E-commerce',
-      challenge: 'Seguimiento de pedidos colapsa WhatsApp',
-      result: '90% consultas resueltas por chatbot',
-      description: 'Chatbot en WhatsApp Business resuelve seguimientos, cambios y devoluciones. Escalamiento inteligente a agentes cuando es necesario.'
-    }
-  ];
+  const cases = enterpriseData;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Casos de Éxito Empresariales</Text>
-      <Text style={styles.subtitle}>Empresas que transformaron su operación con ByteCallers</Text>
+    <View style={[styles.container, isDark && styles.containerDark]}>
+      <Text style={[styles.title, isDark && styles.titleDark]}>Casos de Éxito Empresariales</Text>
+      <Text style={[styles.subtitle, isDark && styles.subtitleDark]}>Empresas que transformaron su operación con ByteCallers</Text>
       
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.carousel}>
         {cases.map((case_, index) => (
           <TouchableOpacity
             key={index}
-            style={[styles.card, activeCase === index && styles.activeCard]}
             onPress={() => setActiveCase(index)}
           >
-            <View style={styles.cardHeader}>
-              <Text style={styles.company}>{case_.company}</Text>
-              <Text style={styles.industry}>{case_.industry}</Text>
-            </View>
-            <Text style={styles.challenge}>Desafío: {case_.challenge}</Text>
-            <Text style={styles.result}>{case_.result}</Text>
-            <Text style={styles.description}>{case_.description}</Text>
+            <Card style={[styles.caseCard, activeCase === index && styles.activeCard]}>
+              <View style={styles.cardHeader}>
+                <Text style={[styles.company, isDark && styles.companyDark]}>{case_.company}</Text>
+                <Text style={styles.industry}>{case_.industry}</Text>
+              </View>
+              <Text style={[styles.challenge, isDark && styles.challengeDark]}>Desafío: {case_.challenge}</Text>
+              <Text style={styles.result}>{case_.result}</Text>
+              <Text style={[styles.description, isDark && styles.descriptionDark]}>{case_.description}</Text>
+            </Card>
           </TouchableOpacity>
         ))}
       </ScrollView>
 
-      <View style={styles.metrics}>
+      <Card style={styles.metrics}>
         <View style={styles.metric}>
           <Text style={styles.metricNumber}>85%</Text>
-          <Text style={styles.metricLabel}>Llamadas Automatizadas</Text>
+          <Text style={[styles.metricLabel, isDark && styles.metricLabelDark]}>Llamadas Automatizadas</Text>
         </View>
         <View style={styles.metric}>
           <Text style={styles.metricNumber}>60%</Text>
-          <Text style={styles.metricLabel}>Reducción de Costos</Text>
+          <Text style={[styles.metricLabel, isDark && styles.metricLabelDark]}>Reducción de Costos</Text>
         </View>
         <View style={styles.metric}>
           <Text style={styles.metricNumber}>24/7</Text>
-          <Text style={styles.metricLabel}>Atención Continua</Text>
+          <Text style={[styles.metricLabel, isDark && styles.metricLabelDark]}>Atención Continua</Text>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -90,10 +73,7 @@ const styles = StyleSheet.create({
   carousel: {
     marginBottom: 40,
   },
-  card: {
-    backgroundColor: '#ffffff',
-    padding: 24,
-    borderRadius: 12,
+  caseCard: {
     marginRight: 16,
     width: 300,
     borderWidth: 1,
@@ -135,9 +115,6 @@ const styles = StyleSheet.create({
   metrics: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#ffffff',
-    padding: 24,
-    borderRadius: 12,
   },
   metric: {
     alignItems: 'center',
@@ -151,6 +128,27 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#64748b',
     marginTop: 4,
+  },
+  containerDark: {
+    backgroundColor: '#0f172a',
+  },
+  titleDark: {
+    color: '#e2e8f0',
+  },
+  subtitleDark: {
+    color: '#94a3b8',
+  },
+  companyDark: {
+    color: '#e2e8f0',
+  },
+  challengeDark: {
+    color: '#94a3b8',
+  },
+  descriptionDark: {
+    color: '#94a3b8',
+  },
+  metricLabelDark: {
+    color: '#94a3b8',
   },
 });
 

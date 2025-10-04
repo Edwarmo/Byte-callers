@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, useColorScheme } from 'react-native';
 
-type Section = 'solutions' | 'enterprise' | 'ai-tech' | 'testimonials' | 'contact';
+type Section = 'home' | 'solutions' | 'enterprise' | 'ai-tech' | 'testimonials' | 'contact';
 
 interface NavigationProps {
   onNavigate: (view: 'public' | 'login') => void;
@@ -17,6 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate, onSectionChange, cu
   const isDark = colorScheme === 'dark';
 
   const sections: { id: Section; label: string; emoji: string }[] = [
+    { id: 'home', label: 'Inicio', emoji: '🏠' },
     { id: 'solutions', label: 'Soluciones IA', emoji: '🤖' },
     { id: 'enterprise', label: 'Empresas', emoji: '🏢' },
     { id: 'ai-tech', label: 'Tecnología', emoji: '🚀' },

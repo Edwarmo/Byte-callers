@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Alaska Airlines",
+    "description": "Mejoramos nuestra eficiencia operativa en un 40% con ByteCallers",
+    "imageUrl": "https://via.placeholder.com/300x200/3498db/ffffff?text=Alaska+Airlines"
+  },
+  {
+    "title": "Hanna Andersson",
+    "description": "La mejor solución de centro de contacto que hemos implementado",
+    "imageUrl": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Hanna+Andersson"
+  },
+  {
+    "title": "Central Bank",
+    "description": "Reducimos los tiempos de espera y aumentamos la satisfacción del cliente",
+    "imageUrl": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Central+Bank"
+  },
+  {
+    "title": "Aeroflow",
+    "description": "Una plataforma robusta que escala con nuestro crecimiento",
+    "imageUrl": "https://via.placeholder.com/300x200/f39c12/ffffff?text=Aeroflow"
+  }
+]

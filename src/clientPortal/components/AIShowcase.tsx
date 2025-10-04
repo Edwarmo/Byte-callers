@@ -1,39 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import aiShowcaseData from '../../infoPageJson/aiShowcase.json';
 
 const AIShowcase: React.FC = () => {
   const [activeDemo, setActiveDemo] = useState('voicebot');
 
-  const demos = [
-    {
-      id: 'voicebot',
-      title: 'Voicebot Call Center',
-      icon: '📞',
-      description: 'Voicebots que atienden llamadas de consultas básicas como saldos, horarios y seguimiento de pedidos.',
-      features: ['Consultas de saldo automáticas', 'Información de horarios 24/7', 'Seguimiento de pedidos en tiempo real']
-    },
-    {
-      id: 'chatbot',
-      title: 'Chatbot Omnicanal',
-      icon: '💬',
-      description: 'Chatbots en web, WhatsApp y redes sociales que resuelven consultas frecuentes instantáneamente.',
-      features: ['Integración WhatsApp Business', 'Respuestas en redes sociales', 'Escalamiento inteligente']
-    },
-    {
-      id: 'assistant',
-      title: 'Asistente de Agente',
-      icon: '🎙️',
-      description: 'IA que escucha llamadas y sugiere respuestas rápidas con transcripción automática.',
-      features: ['Sugerencias en tiempo real', 'Transcripción automática', 'Historial del cliente instantáneo']
-    },
-    {
-      id: 'sentiment',
-      title: 'Análisis de Sentimiento',
-      icon: '📊',
-      description: 'Detección de emociones en tiempo real para alertar supervisores y evaluar calidad.',
-      features: ['Detección de frustración', 'Alertas a supervisores', 'Métricas de satisfacción']
-    }
-  ];
+  const demos = aiShowcaseData;
 
   const activeDemo_ = demos.find(d => d.id === activeDemo);
 

@@ -1,3 +1,4 @@
+export { default as Home } from './Home';
 export { default as ContactForm } from './ContactForm';
 export { default as Testimonials } from './Testimonials';
 export { default as Navigation } from './Navigation';

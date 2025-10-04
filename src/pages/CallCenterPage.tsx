@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
 import { User } from '../business/entities/user/model';
+import { Card } from '../shared/ui';
 
 interface CallCenterPageProps {
   user: User | null;
@@ -8,32 +9,35 @@ interface CallCenterPageProps {
 }
 
 export const CallCenterPage: React.FC<CallCenterPageProps> = ({ user, onLogout }) => {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Panel de Agente</Text>
+    <View style={[styles.container, isDark && styles.containerDark]}>
+      <View style={[styles.header, isDark && styles.headerDark]}>
+        <Text style={[styles.title, isDark && styles.titleDark]}>Panel de Agente</Text>
         <TouchableOpacity style={styles.logoutBtn} onPress={onLogout}>
           <Text style={styles.logoutText}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
       
       <View style={styles.content}>
-        <Text style={styles.welcome}>Bienvenido, {user?.phoneNumber}</Text>
-        <Text style={styles.role}>Rol: {user?.role}</Text>
+        <Text style={[styles.welcome, isDark && styles.welcomeDark]}>Bienvenido, {user?.phoneNumber}</Text>
+        <Text style={[styles.role, isDark && styles.roleDark]}>Rol: {user?.role}</Text>
         
         <View style={styles.dashboard}>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Llamadas Hoy</Text>
+          <Card style={styles.card}>
+            <Text style={[styles.cardTitle, isDark && styles.cardTitleDark]}>Llamadas Hoy</Text>
             <Text style={styles.cardValue}>24</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Tiempo Promedio</Text>
+          </Card>
+          <Card style={styles.card}>
+            <Text style={[styles.cardTitle, isDark && styles.cardTitleDark]}>Tiempo Promedio</Text>
             <Text style={styles.cardValue}>3:45</Text>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.cardTitle}>Satisfacción</Text>
+          </Card>
+          <Card style={styles.card}>
+            <Text style={[styles.cardTitle, isDark && styles.cardTitleDark]}>Satisfacción</Text>
             <Text style={styles.cardValue}>4.8/5</Text>
-          </View>
+          </Card>
         </View>
       </View>
     </View>
@@ -90,11 +94,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 12,
     alignItems: 'center',
-    elevation: 2,
   },
   cardTitle: {
     fontSize: 14,
@@ -105,5 +105,23 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#3498db',
+  },
+  containerDark: {
+    backgroundColor: '#0f172a',
+  },
+  headerDark: {
+    backgroundColor: '#1e293b',
+  },
+  titleDark: {
+    color: '#e2e8f0',
+  },
+  welcomeDark: {
+    color: '#e2e8f0',
+  },
+  roleDark: {
+    color: '#94a3b8',
+  },
+  cardTitleDark: {
+    color: '#94a3b8',
   },
 });

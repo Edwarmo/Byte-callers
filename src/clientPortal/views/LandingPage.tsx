@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, useColorScheme } from 'react-native';
 import Navigation from '../components/Navigation';
+import Home from '../components/Home';
 import Solutions from '../components/Solutions';
 import Enterprise from '../components/Enterprise';
 import AIShowcase from '../components/AIShowcase';
@@ -12,15 +13,16 @@ interface LandingPageProps {
   onNavigate?: (view: 'public' | 'login') => void;
 }
 
-type Section = 'solutions' | 'enterprise' | 'ai-tech' | 'testimonials' | 'contact';
+type Section = 'home' | 'solutions' | 'enterprise' | 'ai-tech' | 'testimonials' | 'contact';
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNavigate }) => {
-  const [currentSection, setCurrentSection] = useState<Section>('solutions');
+  const [currentSection, setCurrentSection] = useState<Section>('home');
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
 
   const renderSection = () => {
     switch (currentSection) {
+      case 'home': return <Home />;
       case 'solutions': return <Solutions />;
       case 'enterprise': return <Enterprise />;
       case 'ai-tech': return <AIShowcase />;

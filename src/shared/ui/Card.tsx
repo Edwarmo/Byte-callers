@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle, useColorScheme } from 'react-native';
 
 interface CardProps {
   children: React.ReactNode;
@@ -13,17 +13,23 @@ const Card: React.FC<CardProps> = ({
   style,
   padding = 16,
   margin = 0,
-}) => (
-  <View
-    style={[
-      styles.card,
-      { padding, margin },
-      style,
-    ]}
-  >
-    {children}
-  </View>
-);
+}) => {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+
+  return (
+    <View
+      style={[
+        styles.card,
+        isDark && styles.cardDark,
+        { padding, margin },
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   card: {
@@ -34,6 +40,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
+  },
+  cardDark: {
+    backgroundColor: '#1e293b',
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
   },
 });
 
